@@ -3,6 +3,7 @@ package com.devopsbuddy.backend.persistence.domain.backend;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -10,19 +11,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by lede on 8/4/16.
+ * Created by tedonema on 28/03/2016.
  */
-
 @Entity
-public class User implements Serializable, UserDetails{
+public class User implements Serializable, UserDetails {
 
-    private static final long serialVersionUID = 6481007968448976939L;
+    /** The Serial Version UID for Serializable classes. */
+    private static final long serialVersionUID = 1L;
 
-    public User() {}
+
+    public User() {
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @Column(unique = true)
     private String username;
@@ -32,24 +36,24 @@ public class User implements Serializable, UserDetails{
     @Column(unique = true)
     private String email;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name="phone_number")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Length(max=500)
+    @Length(max = 500)
     private String description;
 
     private String country;
 
-    @Column(name="profile_image_url")
+    @Column(name = "profile_image_url")
     private String profileImageUrl;
 
-    @Column(name="stripe_customer_id")
+    @Column(name = "stripe_customer_id")
     private String stripeCustomerId;
 
     private boolean enabled;
@@ -57,6 +61,8 @@ public class User implements Serializable, UserDetails{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plan_id")
     private Plan plan;
+
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
@@ -66,8 +72,15 @@ public class User implements Serializable, UserDetails{
             fetch = FetchType.LAZY,
             mappedBy = "user"
     )
-
-
+//    private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
+//
+//    public Set<PasswordResetToken> getPasswordResetTokens() {
+//        return passwordResetTokens;
+//    }
+//
+//    public void setPasswordResetTokens(Set<PasswordResetToken> passwordResetTokens) {
+//        this.passwordResetTokens = passwordResetTokens;
+//    }
 
     public long getId() {
         return id;
