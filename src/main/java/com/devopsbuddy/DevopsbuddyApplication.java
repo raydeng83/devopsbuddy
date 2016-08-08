@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "com.devopsbuddy.backend.persistence.repositories")
 public class DevopsbuddyApplication {
 
 	public static void main(String[] args) {
